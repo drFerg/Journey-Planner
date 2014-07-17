@@ -1,5 +1,4 @@
 from django.db import models
-from durationfield.db.models.fields.duration import DurationField
 
 # Create your models here.
 class Flight(models.Model):
