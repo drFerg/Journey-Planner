@@ -10,8 +10,8 @@ def index(request):
 def paper(request):
     return render(request, 'paper.html')
 
-def card(request):
-    return render(request, 'post-card.html')
+def flightCard(request):
+    return render(request, 'flight-card.html')
 
 def post_list(request):
     return render(request, 'post-list.html')

@@ -1,0 +1,140 @@
+{% load staticfiles %}
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><link rel="import" href="{% static 'bower_components/polymer/polymer.html' %}">
+<link rel="import" href="{% static 'bower_components/core-icon-button/core-icon-button.html' %}">
+
+<polymer-element name="post-card">
+  <template>
+    <style>
+    :host {
+      display: block;
+      position: relative;
+      background-color: white;
+      padding: 5px;
+      width: 100%;
+      height:100%;
+      font-size: 1.0rem;
+      font-weight: 210;
+      margin-bottom: 1px;
+    }
+    .card-header {
+      margin-bottom: 0px;
+    }
+    .card-border {
+      border-style:none none solid none;
+      border-width: 1px;
+      border-color: gray;
+      margin-left:15%;
+      margin-right:15%;
+      margin-bottom:5px;
+    }
+    polyfill-next-selector { content: '.card-header .port'; }
+    .card-header ::content .port {
+      margin: 5px;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+    polyfill-next-selector { content: '.card-header .city'; }
+    .card-header ::content .city {
+      position:relative;
+      bottom: -0.45em;
+      font-size: 0.7rem;
+      font-weight: 200;
+    }
+    polyfill-next-selector { content: '.card-header .icon'; }
+    .card-header ::content .icon {
+      margin: 5px;
+    }
+    polyfill-next-selector { content: '.card-header .plane'; }
+    .card-header ::content .plane {
+      width: 15px;
+      border-radius: 50%;
+      padding-left: 30px;
+      padding-right:20px;
+    }
+    polyfill-next-selector { content: '.card-time .departDate'; }
+    .card-header ::content .departDate {
+      position: relative;
+      left: 16%;
+      padding-right:0px;
+      font-size: 1.0rem;
+      font-weight: 300;
+    }
+    polyfill-next-selector { content: '.card-time .arriveDate'; }
+    .card-header ::content .arriveDate {
+      position: relative;
+      left: 16%;
+      padding-right:0px;
+      font-size: 1.0rem;
+      font-weight: 300;
+    }
+    polyfill-next-selector { content: '.card-time .departTime'; }
+    .card-header ::content .departTime {
+      position: relative;
+      left: 2%;
+      top: 1em;
+      font-size: 1.0rem;
+      font-weight: 300;
+    }
+     polyfill-next-selector { content: '.card-time .arriveTime'; }
+    .card-header ::content .arriveTime {
+      position: relative;
+      left: 2%;
+      top: 1em;
+      font-size: 1.0rem;
+      font-weight: 300;
+    }
+    polyfill-next-selector { content: '.card-time .depart-text'; }
+    .card-header ::content .arrive-text {
+      position: relative;
+      left: 15%;
+
+      font-size: 0.7rem;
+      font-weight: 200;
+    }
+    polyfill-next-selector { content: '.card-time .arrive-text'; }
+    .card-header ::content .arrive-text {
+      position: relative;
+      left: 15%;
+      font-size: 0.7rem;
+      font-weight: 200;
+    }
+    core-icon-button {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      fill: #636363;
+    }
+    :host([favorite]) core-icon-button {
+      fill: #da4336;
+    }
+    </style>
+    <div class="card-header" layout horizontal center>
+      <i class="fa fa-plane card-plane fa-2x icon"></i>
+      <content select="from"></content>
+      <content select="fromCity"></content>
+      <i class="fa fa-plane fa-rotate-45 plane"></i>
+      <content select="to"></content>
+      <content select="toCity"></content>
+    </div>
+    <div class="card-border"></div>
+    <div class="card-time" layout horizontal center>
+      <span class="depart-text">Departs:</span><content select=".departDate"></content><content select=".departTime"></content><span class="arrive-text">Arrives:</span><content select=".arriveDate"></content><content select=".arriveTime"></content>
+    </div>
+    <content></content>
+  </template>
+  <script>
+  Polymer('post-card', {
+    publish: {
+      favorite: {
+        value: false,
+        reflect: true
+      }
+    },
+    favoriteTapped: function(event, detail, sender) {
+      this.favorite = !this.favorite;
+      this.fire('favorite-tap');
+    }
+  });
+  </script>
+</polymer-element>
