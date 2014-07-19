@@ -3,7 +3,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"><link rel="import" href="{% static 'bower_components/polymer/polymer.html' %}">
 <link rel="import" href="{% static 'bower_components/core-icon-button/core-icon-button.html' %}">
 
-<polymer-element name="flight-card">
+<polymer-element name="hotel-card">
   <template>
     <style>
     :host {
@@ -24,20 +24,23 @@
       border-style:none none solid none;
       border-width: 1px;
       border-color: gray;
-      margin-left:15%;
-      margin-right:15%;
+      margin-left:35px;
+      margin-right:35px;
       margin-bottom:5px;
     }
-    polyfill-next-selector { content: '.card-header .port'; }
-    .card-header ::content .port {
-      margin: 5px;
+
+    polyfill-next-selector { content: '.card-header name'; }
+    .card-header ::content city {
+      position:relative;
       font-size: 1.2rem;
       font-weight: 400;
     }
-    polyfill-next-selector { content: '.card-header .city'; }
-    .card-header ::content .city {
+
+    polyfill-next-selector { content: '.card-header city'; }
+    .card-header ::content city {
       position:relative;
       bottom: -0.3em;
+      left:5px;
       font-size: 0.7rem;
       font-weight: 200;
     }
@@ -45,60 +48,59 @@
     .card-header ::content .icon {
       margin: 5px;
     }
-    polyfill-next-selector { content: '.card-header .plane'; }
-    .card-header ::content .plane {
-      width: 15px;
-      border-radius: 50%;
-      padding-left: 30px;
-      padding-right: 20px;
-    }
-    polyfill-next-selector { content: '.card-time .departDate'; }
-    .card-header ::content .departDate {
-      position: relative;
-      left: 16%;
-      padding-right:0px;
-      font-size: 0.8rem;
-      font-weight: 300;
-    }
-    polyfill-next-selector { content: '.card-time .arriveDate'; }
-    .card-header ::content .arriveDate {
-      position: relative;
-      left: 16%;
-      padding-right:0px;
-      font-size: 0.8rem;
-      font-weight: 300;
-    }
-    polyfill-next-selector { content: '.card-time .departTime'; }
-    .card-header ::content .departTime {
-      position: relative;
-      left: 16px;
-      top: 1em;
-      font-size: 0.8rem;
-      font-weight: 300;
-    }
-     polyfill-next-selector { content: '.card-time .arriveTime'; }
-    .card-header ::content .arriveTime {
-      position: relative;
-      left: 16px;
-      top: 1em;
-      font-size: 0.8rem;
-      font-weight: 300;
-    }
-    polyfill-next-selector { content: '.card-time .depart-text'; }
-    .card-header ::content .arrive-text {
-      position: relative;
-      left: 15%;
 
-      font-size: 0.7rem;
-      font-weight: 200;
-    }
-    polyfill-next-selector { content: '.card-time .arrive-text'; }
-    .card-header ::content .arrive-text {
+    polyfill-next-selector { content: '.card-details .checkIn'; }
+    .card-details ::content .checkIn {
       position: relative;
-      left: 15%;
-      font-size: 0.7rem;
-      font-weight: 200;
+      left: 45px;
+      padding-right:0px;
+      font-size: 0.8rem;
+      font-weight: 300;
     }
+    polyfill-next-selector { content: '.card-details .checkOut'; }
+    .card-details ::content .checkOut {
+      position: relative;
+      left: 2px;
+      top: 1em;
+      padding-right:0px;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+    polyfill-next-selector { content: '.card-details .nights'; }
+    .card-details ::content .nights {
+      position: relative;
+      left: 40px;
+      padding-right:0px;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+    polyfill-next-selector { content: '.card-details extras'; }
+    .card-details ::content extras {
+      position: relative;
+      left: 5px;
+      top: 1em;
+      padding-right:0px;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+    polyfill-next-selector { content: '.card-details stars'; }
+    .card-details ::content stars {
+      position: relative;
+      left: 40px;
+      padding-right:0px;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+    polyfill-next-selector { content: '.card-details cost'; }
+    .card-details ::content cost {
+      position: relative;
+      left: 5px;
+      top:1em;
+      padding-right:0px;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+  
     core-icon-button {
       position: absolute;
       top: 3px;
@@ -110,20 +112,28 @@
     }
     </style>
     <div class="card-header" layout horizontal center>
-      <i class="fa fa-plane card-plane fa-2x icon"></i>
-      <content select="from"></content>
-      <content select="fromCity"></content>
-      <i class="fa fa-plane fa-rotate-45 plane"></i>
-      <content select="to"></content>
-      <content select="toCity"></content>
+      <i class="fa fa-home card-hotel fa-2x icon"></i>
+      <content select="name"></content>
+      <content select="city"></content>
     </div>
     <div class="card-border"></div>
-    <div class="card-time" layout horizontal center>
-      <span class="depart-text">Departs:</span><content select=".departDate"></content><content select=".departTime"></content><span class="arrive-text">Arrives:</span><content select=".arriveDate"></content><content select=".arriveTime"></content>
+    <div class="card-details" layout horizontal center>
+      <div class="checkIn">
+        <i class="fa fa-sign-in"></i><content select="checkIn"></content>
+      </div>
+      <div class="checkOut">
+        <i class="fa fa-sign-out"></i><content select="checkOut"></content>
+      </div>
+      <div class="nights">
+        <i class="fa fa-moon-o"></i> <content select="nights"></content>
+      </div>
+      <content select="extras"></content>
+      <content select="stars"></content>
+      <content select="cost"></content>
     </div>
   </template>
   <script>
-  Polymer('flight-card', {
+  Polymer('hotel-card', {
     publish: {
       favorite: {
         value: false,

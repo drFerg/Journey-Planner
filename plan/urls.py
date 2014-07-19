@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^paper/$', views.paper, name='paper'),
     url(r'^paper/flight-card.html$', views.flightCard, name='card'),
+    url(r'^paper/hotel-card.html$', views.hotelCard, name='card'),
     url(r'^paper/post-list.html$', views.post_list, name='post_list')
 )

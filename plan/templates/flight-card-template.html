@@ -1,0 +1,36 @@
+{% extends "paper.html" %}
+{% load staticfiles %}
+{% load string_multiply %}
+{% block cards %}
+{% for card in cards %}
+<div class="cardContainer container" vertical layout>
+    {% if card.cardType == "flight" %}
+    <flight-card>
+        <from class="port">{{ card.departPort }}</from><fromCity class="city">{{ card.departCity }}</fromCity>
+        <to class="port">{{ card.arrivePort }}</to><toCity class="city">{{ card.arriveCity}}</toCity>
+        <span class="departDate">{{ card.departDate|date:"d/m" }}</span>
+        <span class="departTime">{{ card.departDate|date:"H:i" }}</span>
+        <span class="arriveDate">{{ card.departDate|date:"d/m" }}</span>
+        <span class="arriveTime">{{ card.arriveDate|date:"H:i" }}</span>
+    </flight-card>
+    {% elif card.cardType == "hotel" %}
+    <hotel-card>
+      <name>{{ card.name }}</name>
+      <city>{{ card.city }}</city>
+      <checkIn>{{ card.checkIn|date:"H:i" }}</checkIn>
+      <checkOut>{{ card.checkOut|date:"H:i" }}</checkOut>
+      <nights>{{ card.nights }}</nights>
+      <stars>
+        {% filter multiply:card.stars %}
+            <i class="fa fa-star"></i>
+        {% endfilter %}
+      </stars>
+      <cost><i class="fa fa-yen"></i><i class="fa fa-yen"></i></cost>
+      <extras><i class="fa fa-suitcase"></i> <i class="fa fa-car"></i> <i class="fa fa-cutlery"></i> <i class="fa fa-rss fa-wifi"></i></extras>
+    </hotel-card>
+    {% else %}
+    <span>ERROR {{ card.cardType }}</span>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

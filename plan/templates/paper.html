@@ -16,6 +16,7 @@
     href="{% static 'bower_components/paper-tabs/paper-tabs.html' %}">
   <link rel="import" href="{% static 'bower_components/core-drawer-panel/core-drawer-panel.html' %}">
   <link rel="import" href="flight-card.html">
+  <link rel="import" href="hotel-card.html">
   <link rel="import" href="{% static 'bower_components/google-map/google-map.html' %}">
   <link rel="stylesheet" href="{% static 'css/plan.css' %}">
   <!--<script type="text/javascript" 
@@ -46,8 +47,8 @@
     -ms-user-select: none;
     user-select: none;
   }
-  .container {
-    margin: 30px auto;
+  .card-list {
+    margin: 30px 30px;
   }
   @media (min-width: 481px) {
     #tabs {
@@ -58,6 +59,7 @@
       height:90px;
     }
     .mapContainer {
+      margin-top: 30px;
       width: 600px;
     }
   }
@@ -68,22 +70,16 @@
   <core-header-panel>
     <core-toolbar>
       <paper-tabs id="tabs" selected="all" valueattr="name" self-end>
-        <paper-tab name="all">ALL</paper-tab>
-        <paper-tab name="favorites">FAVORITES</paper-tab>
+        <paper-tab name="all">All</paper-tab>
+        <paper-tab name="flights">Flights</paper-tab>
+        <paper-tab name="hotels">Hotels</paper-tab>
       </paper-tabs>
     </core-toolbar>
-    <div horizontal layout>
-    <div class="cardContainer container" vertical layout>
-      <post-card>
-        <from class="port">LGW</from><fromCity class="city">London</fromCity>
-        <to class="port">HAN</to><toCity class="city">Hanoi</toCity>
-        <span class="departDate">29/08</span>
-        <span class="departTime">10:00</span>
-        <span class="arriveDate">30/08</span>
-        <span class="arriveTime">13:00</span>
-      </post-card>
+    <div layout horizontal>
+    <div class="card-list" vertical layout>
+      {% block cards %}{% endblock %}
     </div>
-    <div class="mapContainer container" vertical layout>
+    <div class="mapContainer" vertical layout>
       <style>
         google-map {
           display: block;
@@ -91,7 +87,7 @@
           width: 600px;
         }
       </style>
-      <!-- <google-map latitude="37.77493" longitude="-122.41942"></google-map> -->
+      <google-map latitude="37.77493" longitude="-122.41942"></google-map>
     </div>
   </div>
   </core-header-panel>
